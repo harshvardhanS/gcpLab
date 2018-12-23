@@ -1,0 +1,5 @@
+---
+# tasks file for mongodb
+  - name: install & configure mongo 
+    include_tasks: install_mongo.yml
+    tags: install_mongo

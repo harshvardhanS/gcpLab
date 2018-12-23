@@ -1,0 +1,11 @@
+---
+  - name: "Install requirement - {{ item }}"
+    apt:
+      name: "{{ item }}"
+      update_cache: true
+      state: present
+    with_items:
+      - apt-transport-https
+      - openjdk-8-jre-headless
+      - uuid-runtime
+      - pwgen

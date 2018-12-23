@@ -1,0 +1,6 @@
+---
+# vars file for mongodb
+repo_key: 'hkp://keyserver.ubuntu.com:80'
+repo_id: '2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5'
+repo_url: 'deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse'
+mongo_package: 'mongodb-org'

@@ -1,0 +1,52 @@
+---
+    - name: 'Elasticsearch - Add repo key'
+      apt_key:
+        url: "{{ repo_key }}"
+        state: present
+    - name: 'Elasticsearch - Add repo'
+      apt_repository:
+         repo: "{{ repo_url }}"
+         state: present
+    - name: 'Elasticsearch - Install package'
+      apt:
+        name: "{{ es_package }}"
+        update_cache: true
+        state: present
+      notify:
+        - Elasticsearch - restart service
+    - name: 'Elasticsearch - Configure java path'
+      replace:
+        path: "{{ default_es_file }}"
+        regexp: JAVA_HOME=$
+        replace: "JAVA_HOME={{ java_path }}"
+      notify:
+        - Elasticsearch - restart service
+    - name: 'Elasticsearch - Configure initial heap size'
+      when: es_memory is defined
+      lineinfile:
+        path: "{{ jvm_opstion_file }}"
+        regexp: '(?!.*-Xms{{ es_memory }}m)^-Xms\d+?[gm]'
+        line: "Xms{{ es_memory }}m"
+        state: present
+      notify:
+        - Elasticsearch - restart service
+    - name: 'Elasticsearch -Configure maximum heap size'
+      when: es_memory is defined
+      lineinfile:
+        path: "{{ jvm_opstion_file }}"
+        regexp: '(?!.*-Xmx{{ es_memory }}m)^-Xmx\d+?[gm]'
+        line: "Xmx{{ es_memory }}m"
+        state: present
+      notify:
+        - Elasticsearch - restart service
+    - name: Copy elasticsearch configuration
+      template:
+        src: "{{ es_config_template }}"
+        dest: "{{ es_config_file }}"
+    - name: 'Elasticseach - Configure service'
+      service:
+        name: "elasticsearch"
+        enabled: yes
+        state: started
+      notify:
+        - Elasticsearch - restart service

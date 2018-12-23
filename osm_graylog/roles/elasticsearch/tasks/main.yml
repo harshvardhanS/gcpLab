@@ -1,0 +1,6 @@
+---
+# tasks file for elasticsearch 
+ - name: install & configure elasticsearch
+   include_tasks: install_elastic.yml
+   tags: install_elasticsearch
+

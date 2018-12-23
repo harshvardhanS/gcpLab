@@ -1,0 +1,22 @@
+- hosts: ansible-jenkins
+  #connection: local
+  become: yes
+  become_user: root
+  vars_prompt:
+    - name: "password"
+      prompt: "Enter 'admin' user password"
+      private: yes
+      default: graylog
+    - name: "gl_ip"
+      prompt: "IP for graylog server? (defaults to system IP)"
+      private: no
+    - name: "es_memory"
+      prompt: "Change memory committed to elasticsearch process (in MBs)"
+      private: no
+    - name: "gl_memory"
+      prompt: "Change memory committed to graylog process (in MBs)"
+      private: no
+
+  tasks:
+    - debug: msg="the value is  {{ password }}"
+    - debug: msg="the value is  {{ gl_ip }}"

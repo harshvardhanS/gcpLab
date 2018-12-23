@@ -1,0 +1,44 @@
+---
+  - name: "Graylog - Get packages"
+    apt:
+      deb: "{{ package_url }}"
+      update_cache: true
+      state: present
+  - name: "Graylog - Install packages"
+    apt:
+      update_cache: true
+      name: "{{ package_name }}"
+      state: present
+  - name: Copy graylog configuration
+    template:
+      src: "{{ gl_config_template }}"
+      dest: "{{ graylog_conf_file }}"
+  - name: "Graylog - Generate password secret"
+    command: pwgen -N 1 -s 96
+    register: password_secret
+  - name: "Graylog - Generate admin pasword hash"
+    shell: "echo -n {{ password }} | shasum -a 256"
+    register: sha_password
+  - debug: msg="password_secret is  {{ password_secret.stdout }}"
+  - debug: msg="sha_password  {{ sha_password.stdout.split(' ')[0] }}"
+  - name: "Graylog - Configure password and sceret"
+    replace:
+      path: "{{ graylog_conf_file }}"
+      regexp: ^password_secret =$
+      replace:  "password_secret = {{ password_secret.stdout }}"
+    notify:
+      - Graylog - restart service
+  - name: "Graylog - Configure admin password hash"
+    replace:
+      path: "{{ graylog_conf_file }}"
+      regexp: "(?!.*{{ sha_password.stdout.split(' ')[0] }})^root_password_sha2 .+$"
+      replace: "root_password_sha2 = {{ sha_password.stdout.split(' ')[0] }}"
+    notify:
+      - Graylog - restart service
+  - name: "Graylog - Configure service"
+    service:
+      name: "graylog-server"
+      enabled: yes
+      state: started
+    notify:
+      - Graylog - restart service

@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: true
+  become_user: root
+  roles:
+          #- { role: ansible-cron, tags: [ 'cron-config', 'cron-service' ] }
+          - { role: common }
+          - { role: mongodb }
+          - { role: elasticsearch }
+          - { role: graylog }

@@ -1,0 +1,12 @@
+---
+# vars file for elasticsearch
+repo_key: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+repo_url: "deb https://artifacts.elastic.co/packages/5.x/apt stable main"
+es_package: 'elasticsearch'
+#es_memory: 2048
+cluster_name: graylog
+default_es_file: '/etc/default/elasticsearch'
+jvm_opstion_file: '/etc/elasticsearch/jvm.options'
+java_path: '/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java'
+es_config_template: "elasticsearch.yml.j2"
+es_config_file: "/etc/elasticsearch/elasticsearch.yml"
