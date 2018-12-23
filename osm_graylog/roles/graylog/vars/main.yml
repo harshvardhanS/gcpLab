@@ -1,7 +1,7 @@
 ---
 # vars file for Graylog
-gl_ip: "{{ ansible_default_ipv4.address }}"
-gl_public_ip: '35.237.65.101'
+#gl_ip: "{{ ansible_default_ipv4.address }}"
+#gl_public_ip:
 password: 'graylog123'
 package_url: 'https://packages.graylog2.org/repo/packages/graylog-2.5-repository_latest.deb'
 package_name: 'graylog-server'
@@ -24,7 +24,5 @@ elasticsearch_replicas: 0
 mongodb_uri: 'mongodb://localhost/graylog'
 # Authenticate against the MongoDB server
 #mongodb_uri = mongodb://grayloguser:secret@localhost:27017/graylog
-
 # Use a replica set instead of a single host
 #mongodb_uri = mongodb://grayloguser:secret@localhost:27017,localhost:27018,localhost:27019/graylog
-
