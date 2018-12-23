@@ -1,2 +1,2 @@
 [gcp-server]
-ansible-jenkins ansible_host=35.237.65.101 ansible_user=hasawat
+ansible-jenkins ansible_host= ansible_user=
