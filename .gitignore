@@ -1,3 +1,3 @@
 graylog_install.yml
-osm_gralog_setup.yml
-hosts
+osm_graylog/osm_gralog_setup.yml
+osm_graylog/hosts

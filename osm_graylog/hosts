@@ -1,2 +1,0 @@
-[gcp-server]
-ansible-jenkins ansible_host= ansible_user=
