@@ -1,0 +1,36 @@
+---
+# Pretask install python
+ - hosts: graylog
+   become: true
+   gather_facts: false
+   pre_tasks:
+     - name: 'install python2'
+       raw: sudo apt-get -y install python
+
+# Install common package on each nodes
+# - hosts: all
+ - hosts: graylog
+   become: true
+   roles:
+     - { role: common }
+
+# install elasticsearch
+# - hosts: es-server
+#   become: true
+#   roles:
+#     - { role: elastic }
+
+# install mongo-server
+# - hosts: mongo
+#   become: true
+#   roles:
+#     - { role: mongodb }
+
+# install graylog-server
+ - hosts: graylog
+   become: true
+   vars:
+     gl_ip: "{{ ansible_default_ipv4.address }}"
+     gl_public_ip: ''
+   roles:
+     - { role: graylog }

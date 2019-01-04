@@ -1,0 +1,18 @@
+2018-12-30 19:17:09,772 - [INFO] - from play.api.Play in main 
+Application started (Prod)
+
+2018-12-30 19:17:10,599 - [INFO] - from play.core.server.AkkaHttpServer in main 
+Listening for HTTP on /0:0:0:0:0:0:0:0:9000
+
+2018-12-30 19:17:29,155 - [INFO] - from play.core.server.AkkaHttpServer in Thread-2 
+Stopping server...
+
+2018-12-30 19:19:25,358 - [INFO] - from play.api.Play in main 
+Application started (Prod)
+
+2018-12-30 19:19:26,124 - [INFO] - from play.core.server.AkkaHttpServer in main 
+Listening for HTTP on /0:0:0:0:0:0:0:0:8080
+
+2018-12-30 19:23:56,715 - [INFO] - from play.core.server.AkkaHttpServer in Thread-2 
+Stopping server...
+

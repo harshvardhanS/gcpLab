@@ -1,0 +1,13 @@
+ - name: Copy replica_init.js file
+   template:
+     src: replica_init.j2
+     dest: /tmp/replica_init.js
+   when: "'mongo-master' in group_names"
+
+ - name: Add IP address to host file
+   lineinfile:
+     dest: /etc/hosts
+     line: "{{ hostvars[item].ansible_default_ipv4.address }} {{item}}"
+     state: present
+   with_items: "{{ groups['mongo'] }}"
+   when: "'mongo-master' in group_names"

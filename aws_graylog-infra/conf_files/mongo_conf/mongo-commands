@@ -1,0 +1,4 @@
+mongo --port 27017 -u "admin" -p "admin123" --authenticationDatabase "admin"
+mongo --port 27017 -u "grayloguser" -p "graylog123" --authenticationDatabase "graylog"
+mongo  --host graylog-mongo1 --port 27017 -u "grayloguser" -p "graylog123" --authenticationDatabase "graylog"
+mongo --port 27017 -u "superAdmin" -p "admin123" --authenticationDatabase "admin"
